@@ -15,7 +15,7 @@
 	<name>WebServices</name>
 	<description>Coderic WebService Gateway</description>
 	<properties>
-		<java.version>21</java.version>
+		<java.version>17</java.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -69,12 +69,12 @@
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
-
 	<build>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+				<version>3.2.2</version>
 				<configuration>
 					<excludes>
 						<exclude>
@@ -84,7 +84,26 @@
 					</excludes>
 				</configuration>
 			</plugin>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>jaxb2-maven-plugin</artifactId>
+				<version>3.1.0</version>
+				<executions>
+					<execution>
+						<id>xjc</id>
+						<goals>
+							<goal>xjc</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<sources>
+						<source>${project.basedir}/src/main/resources/xsd/countries.xsd</source>
+						<!--source>${project.basedir}/src/main/resources/xsd/common/*.xsd</source>
+						<source>${project.basedir}/src/main/resources/xsd/maindoc/*.xsd</source-->
+					</sources>
+				</configuration>
+			</plugin>
 		</plugins>
 	</build>
-
 </project>
